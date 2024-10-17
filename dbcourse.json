@@ -1,0 +1,39 @@
+{
+  "Course": [
+    {
+      "title": "C1",
+      "description": "Cours HTML/CSS",
+      "nbEtud": 10
+    },
+    {
+      "title": "C2",
+      "description": "Cours Docker",
+      "nbEtud": 10
+    },
+    {
+      "title": "C3",
+      "description": "Cours cybersécurité",
+      "nbEtud": 10
+    },
+    {
+      "title": "C4",
+      "description": "Cours FastApi",
+      "nbEtud": 10
+    },
+    {
+      "title": "C5",
+      "description": "Cours Laravel",
+      "nbEtud": 10
+    },
+    {
+      "title": "C6",
+      "description": "Cours Angular",
+      "nbEtud": 10
+    },
+    {
+      "title": "C6",
+      "description": "Cours JS/TS",
+      "nbEtud": 10
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<section>
+    <!-- Interpolation : transferer des données -->
+  <p>Interpolation : {{getText()}}</p><hr>
+
+  <!-- Property Binding : mettre des valeurs à des propriétés -->
+  <p>Property binding <input type="text" [value]="author"></p><hr>
+
+  <!-- Event binding : appeler une méthode sur un événement -->
+  <p>Event binding <input type="text" (click)="updateText()"></p><hr>
+
+  <!-- Two way binding : données en fontion d'un événement -->
+  <p>Two way binding <input type="text" [(ngModel)]="twBinding"></p>
+  <p>Vous avez entré : {{ twBinding }}</p><hr>
+
+  <!-- ngFor : itérer sur la liste des cours (Données en dur) -->
+  <div class="course-title">{{title}}</div>
+  <ul>
+    <ng-container *ngFor="let course of courses">
+      <li>{{ course.title }} - {{ course.description }} - {{ course.nbEtud }}</li>
+    </ng-container>
+  </ul><hr>
+
+  <!-- ngFor : itérer sur la liste des cours (Données en db) -->
+  <div class="course-title">{{title}}</div>
+  <ul>
+    <ng-container *ngFor="let courseData of coursesData">
+      <li>{{ courseData.title }} - {{ courseData.description }} - {{ courseData.nbEtud }}</li>
+    </ng-container>
+  </ul><hr>
+
+</section>

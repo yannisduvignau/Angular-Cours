@@ -1,0 +1,20 @@
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:20px 5% !important;
+  color: white;
+  background-color: #6040fe;
+  .items{
+      display: flex;
+      gap: 20px;
+      a{
+          text-decoration: none;
+          color: white;
+          font-weight: bold;
+      }
+      a:hover{
+          text-decoration:underline;
+      }
+  }
+}
