@@ -1,26 +1,28 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { Course } from '../Model/course';
 import { CourseServiceService } from '../services/course/course-service.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { NotificationService } from '../services/notification/notification.service';
 import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive,NgIf],
+  imports: [RouterLink,RouterLinkActive,NgIf,FormsModule],
   templateUrl: './course.component.html',
   styleUrl: './course.component.scss'
 })
 export class CourseComponent {
+
   @Input() Course!: Course;
+  @Output() newNb = new EventEmitter<number>();
   theCourse!: Course | undefined;
   idCourse!: number;
 
+  lastNb!: number;
+
   constructor(private courseService : CourseServiceService, private route: ActivatedRoute,private notificationService: NotificationService) { }
-
-
-
 
 
   /**
@@ -45,6 +47,20 @@ export class CourseComponent {
 
 
 
+  /**
+   *
+   *
+   * @return void
+   */
+  updateNbEtude() {
+    const nb = this.Course.nbEtud - this.lastNb;
+    this.lastNb = this.Course.nbEtud;
+
+    this.newNb.emit(nb);
+  }
+
+
+
 
   /**
    *
@@ -52,6 +68,8 @@ export class CourseComponent {
    * @return void
    */
   ngOnInit(): void {
+    // this.lastNb = this.Course.nbEtud;
+
     this.idCourse = this.route.snapshot.params["id"];
     if (this.idCourse !== undefined) {
       console.log(this.idCourse)

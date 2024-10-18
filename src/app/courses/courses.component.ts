@@ -5,14 +5,15 @@ import { NgFor, NgIf } from '@angular/common';
 import { CourseServiceService } from '../services/course/course-service.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { NotificationService } from '../services/notification/notification.service';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CourseComponent } from '../course/course.component';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, ReactiveFormsModule,RouterLink,RouterLinkActive,NgxPaginationModule],
+  imports: [FormsModule, NgFor, NgIf, ReactiveFormsModule,RouterLink,RouterLinkActive,NgxPaginationModule,CourseComponent],
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss'] // Correction ici (styleUrls)
+  styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
 
@@ -101,6 +102,17 @@ export class CoursesComponent implements OnInit {
   /**
    *
    *
+   * @return void
+   */
+  onNewNb($event:number) {
+    console.log($event)
+  }
+
+
+
+  /**
+   *
+   *
    *
    *
    *
@@ -138,7 +150,8 @@ export class CoursesComponent implements OnInit {
     this.formulaire = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      nbEtud: [0, Validators.required]
+      nbEtud: [0, Validators.required],
+      descriptionLongue: ['', Validators.required],
     });
   }
 
@@ -194,6 +207,7 @@ export class CoursesComponent implements OnInit {
           title: this.formulaire.get('title')?.value,
           description: this.formulaire.get('description')?.value,
           nbEtud: this.formulaire.get('nbEtud')?.value,
+          descriptionLongue: this.formulaire.get('descriptionLongue')?.value,
         };
 
         this.courseService.addCourse(newCourse).subscribe({

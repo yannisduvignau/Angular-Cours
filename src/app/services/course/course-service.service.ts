@@ -14,9 +14,9 @@ export class CourseServiceService {
 
   getCourses():Course[]{
     return [
-      {id:1, title: "C1", description: "Cours HTML/CSS", nbEtud:10},
-      {id:2, title: "C2", description: "Cours Angular", nbEtud:10},
-      {id:3, title: "C3", description: "Cours JS/TS", nbEtud:10}
+      {id:1, title: "C1", description: "Cours HTML/CSS", nbEtud:10, descriptionLongue:"LoAliquip aliqua nostrud officia sint duis velit. Aliquip culpa dolor cupidatat nostrud laborum qui magna proident deserunt pariatur esse. Eiusmod magna in cupidatat nostrud laborum. Labore laborum do id fugiat. Consequat velit veniam veniam sint irure ad tempor nulla cillum aliqua occaecat ex labore. Aliquip mollit excepteur fugiat qui pariatur cillum voluptate ad. Aliquip laboris consectetur fugiat cillum amet anim eu irure excepteur commodo incididunt qui ipsum."},
+      {id:2, title: "C2", description: "Cours Angular", nbEtud:10, descriptionLongue:"LoAliquip aliqua nostrud officia sint duis velit. Aliquip culpa dolor cupidatat nostrud laborum qui magna proident deserunt pariatur esse. Eiusmod magna in cupidatat nostrud laborum. Labore laborum do id fugiat. Consequat velit veniam veniam sint irure ad tempor nulla cillum aliqua occaecat ex labore. Aliquip mollit excepteur fugiat qui pariatur cillum voluptate ad. Aliquip laboris consectetur fugiat cillum amet anim eu irure excepteur commodo incididunt qui ipsum."},
+      {id:3, title: "C3", description: "Cours JS/TS", nbEtud:10, descriptionLongue:"LoAliquip aliqua nostrud officia sint duis velit. Aliquip culpa dolor cupidatat nostrud laborum qui magna proident deserunt pariatur esse. Eiusmod magna in cupidatat nostrud laborum. Labore laborum do id fugiat. Consequat velit veniam veniam sint irure ad tempor nulla cillum aliqua occaecat ex labore. Aliquip mollit excepteur fugiat qui pariatur cillum voluptate ad. Aliquip laboris consectetur fugiat cillum amet anim eu irure excepteur commodo incididunt qui ipsum."}
     ]
   }
 

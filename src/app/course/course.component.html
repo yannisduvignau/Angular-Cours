@@ -1,14 +1,30 @@
-<section>
-  <div class="course-title">
-    <a routerLink="/courses" routerLinkActive="active" class="btn btn-secondary">Retour vers les cours</a>
-  </div>
+<div *ngIf="Course == undefined">
+  <section>
+    <div class="course-title">
+      <a routerLink="/courses" routerLinkActive="active" class="btn btn-secondary">Retour vers les cours</a>
+    </div>
 
-  <hr>
+    <hr>
 
-  <div *ngIf="theCourse !== undefined">
-    <li>{{ theCourse.title }} - {{ theCourse.description }} - {{ theCourse.nbEtud }}</li>
-  </div>
-  <div *ngIf="theCourse === undefined">
-      <p>Le Cours {{idCourse}} n'existe pas</p>
-  </div>
-</section>
+    <div *ngIf="theCourse !== undefined">
+      <li>{{ theCourse.title }} - {{ theCourse.description }} - {{ theCourse.nbEtud }}</li>
+    </div>
+
+    <div>{{ theCourse?.descriptionLongue }}</div>
+
+    <div *ngIf="theCourse === undefined">
+        <p>Le Cours {{idCourse}} n'existe pas</p>
+    </div>
+  </section>
+</div>
+
+
+<div *ngIf="Course !== undefined">
+  <li class="list-group-item" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding-right:80px;padding-left:80px">
+    <div><strong>{{ Course.title }}</strong> - {{ Course.description }} - {{ Course.nbEtud }}</div>
+    <div style="display:flex;align-items:center;column-gap:50px">
+      <div><input [name]="Course.title" [(ngModel)]="Course.nbEtud" (change)="updateNbEtude()"> étudiants</div>
+      <a class="btn btn-secondary float-right" [routerLink]="['/course', Course.id]">Voir le détail</a>
+    </div>
+  </li>
+</div>

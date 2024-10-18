@@ -7,14 +7,33 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
+        <!-- Dropdown visible uniquement si l'utilisateur est connecté -->
+        <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" routerLink="courses" routerLinkActive="active">Les cours</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Item 2</a>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Item 3</a>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">Se connecter</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" href="#" (click)="logout()">Se déconnecter</a>
         </li>
       </ul>
     </div>

@@ -24,48 +24,71 @@
 
   <div style="display:flex;flex-direction:row;justify-content:space-evenly">
     <!-- Formulaire d'ajout d'un cours -->
-    <div>
-      <h3 class="course-title">Ajout d'un cours</h3>
-      <form [formGroup]="formulaire" (ngSubmit)="addNewCourse()">
-        <div>
-          <label for="title">Titre :</label>
-          <input id="title" formControlName="title" placeholder="Titre du cours" />
-          <div *ngIf="formulaire.get('title')?.invalid && formulaire.get('title')?.touched">
-            <small class="text-danger">Le titre est requis.</small>
+    <div class="container mt-5">
+      <h3 class="course-title mb-4">Ajout d'un cours</h3>
+
+      <form [formGroup]="formulaire" (ngSubmit)="addNewCourse()" class="needs-validation" novalidate>
+        <!-- Titre du cours -->
+        <div class="form-group mb-3">
+          <label for="title" class="form-label">Titre :</label>
+          <input id="title" class="form-control" formControlName="title" placeholder="Titre du cours" [class.is-invalid]="formulaire.get('title')?.invalid && formulaire.get('title')?.touched"/>
+          <div *ngIf="formulaire.get('title')?.invalid && formulaire.get('title')?.touched" class="invalid-feedback">
+            Le titre est requis.
           </div>
         </div>
-        <div>
-          <label for="description">Description :</label>
-          <input id="description" formControlName="description" placeholder="Description du cours" />
-          <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched">
-            <small class="text-danger">La description est requise.</small>
+
+        <!-- Description du cours -->
+        <div class="form-group mb-3">
+          <label for="description" class="form-label">Description :</label>
+          <input id="description" class="form-control" formControlName="description" placeholder="Description du cours" [class.is-invalid]="formulaire.get('description')?.invalid && formulaire.get('description')?.touched"/>
+          <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched" class="invalid-feedback">
+            La description est requise.
           </div>
         </div>
-        <div>
-          <label for="nbEtud">Nombre d'étudiants :</label>
-          <input id="nbEtud" formControlName="nbEtud" type="number" placeholder="Nombre d'étudiants" />
-          <div *ngIf="formulaire.get('nbEtud')?.invalid && formulaire.get('nbEtud')?.touched">
-            <small class="text-danger">Le nombre d'étudiants est requis.</small>
+
+        <!-- Nombre d'étudiants -->
+        <div class="form-group mb-3">
+          <label for="nbEtud" class="form-label">Nombre d'étudiants :</label>
+          <input id="nbEtud" class="form-control" formControlName="nbEtud" type="number" placeholder="Nombre d'étudiants" [class.is-invalid]="formulaire.get('nbEtud')?.invalid && formulaire.get('nbEtud')?.touched"/>
+          <div *ngIf="formulaire.get('nbEtud')?.invalid && formulaire.get('nbEtud')?.touched" class="invalid-feedback">
+            Le nombre d'étudiants est requis.
           </div>
         </div>
+
+        <!-- Description longue du cours -->
+        <div class="form-group mb-3">
+          <label for="descriptionLongue" class="form-label">Description longue :</label>
+          <input id="descriptionLongue" class="form-control" formControlName="descriptionLongue" placeholder="Description longue du cours" [class.is-invalid]="formulaire.get('descriptionLongue')?.invalid && formulaire.get('descriptionLongue')?.touched"/>
+          <div *ngIf="formulaire.get('descriptionLongue')?.invalid && formulaire.get('descriptionLongue')?.touched" class="invalid-feedback">
+            La descriptionLongue est requise.
+          </div>
+        </div>
+
+        <!-- Bouton de soumission -->
         <button type="submit" class="btn btn-primary" [disabled]="formulaire.invalid">Ajouter le cours</button>
       </form>
     </div>
 
+
     <!-- Formulaire pour supprimer un cours par ID -->
-    <div>
-      <h3 class="course-title">Supprimer un cours</h3>
-      <form (ngSubmit)="deleteCourse()" [formGroup]="deleteForm">
-        <div>
-          <label for="courseId">Sélectionner le cours à supprimer :</label>
-        </div>
-        <div>
-          <select id="courseId" formControlName="courseId" required>
+    <div class="container mt-5">
+      <h3 class="course-title mb-4">Supprimer un cours</h3>
+
+      <form (ngSubmit)="deleteCourse()" [formGroup]="deleteForm" class="needs-validation" novalidate>
+        <!-- Sélectionner un cours -->
+        <div class="form-group mb-3">
+          <label for="courseId" class="form-label">Sélectionner le cours à supprimer :</label>
+          <select id="courseId" class="form-select" formControlName="courseId" required [class.is-invalid]="deleteForm.get('courseId')?.invalid && deleteForm.get('courseId')?.touched">
             <option value="">Sélectionner un cours</option>
             <option *ngFor="let course of coursesData" [value]="course.id">{{ course.id }} - {{ course.title }}</option>
           </select>
+          <div *ngIf="deleteForm.get('courseId')?.invalid && deleteForm.get('courseId')?.touched" class="invalid-feedback">
+            Veuillez sélectionner un cours.
+          </div>
         </div>
-        <button type="submit" class="btn btn-danger">Supprimer le cours</button>
+
+        <!-- Bouton de suppression -->
+        <button type="submit" class="btn btn-danger" [disabled]="deleteForm.invalid">Supprimer le cours</button>
       </form>
     </div>
   </div><hr>
@@ -94,10 +117,12 @@
   </nav>
   <ul class="list-group mb-3">
     <ng-container *ngFor="let courseData of coursesData | paginate: { itemsPerPage: 10, currentPage: currentPage }; let i = index">
-      <li class="list-group-item">
-        <strong>{{ courseData.title }}</strong> - {{ courseData.description }} - {{ courseData.nbEtud }}
+      <!-- <li class="list-group-item" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding-right:80px;padding-left:80px">
+        <div><strong>{{ courseData.title }}</strong> - {{ courseData.description }} - {{ courseData.nbEtud }}</div>
         <a class="btn btn-secondary float-right" [routerLink]="['/course', courseData.id]">Voir le détail</a>
-      </li>
+      </li> -->
+      <app-course [Course]="courseData" (newNb)="onNewNb($event)"></app-course>
+      <!-- <app-course [Course]="courseData"></app-course> -->
     </ng-container>
   </ul>
 
