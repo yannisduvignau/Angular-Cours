@@ -1,5 +1,5 @@
 <section>
-    <!-- Interpolation : transferer des données -->
+  <!-- Interpolation : transferer des données -->
   <p>Interpolation : {{getText()}}</p><hr>
 
   <!-- Property Binding : mettre des valeurs à des propriétés -->
@@ -28,4 +28,55 @@
     </ng-container>
   </ul><hr>
 
+  <!-- ngFor : itérer sur la liste des cours (Données en db) -->
+  <div class="course-title">{{title}}</div>
+  <div *ngIf="theCourse !== undefined">
+    <li>{{ theCourse.title }} - {{ theCourse.description }} - {{ theCourse.nbEtud }}</li>
+  </div>
+  <div *ngIf="theCourse === undefined">
+      <p>Le Cours {{idCourse}} n'existe pas</p>
+  </div>
+  <hr>
+
+  <!-- Formulaire d'ajout d'un cours -->
+  <form [formGroup]="formulaire" (ngSubmit)="addNewCourse()">
+    <div>
+      <label for="title">Titre :</label>
+      <input id="title" formControlName="title" placeholder="Titre du cours" />
+      <div *ngIf="formulaire.get('title')?.invalid && formulaire.get('title')?.touched">
+        <small class="text-danger">Le titre est requis.</small>
+      </div>
+    </div>
+    <div>
+      <label for="description">Description :</label>
+      <input id="description" formControlName="description" placeholder="Description du cours" />
+      <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched">
+        <small class="text-danger">La description est requise.</small>
+      </div>
+    </div>
+    <div>
+      <label for="nbEtud">Nombre d'étudiants :</label>
+      <input id="nbEtud" formControlName="nbEtud" type="number" placeholder="Nombre d'étudiants" />
+      <div *ngIf="formulaire.get('nbEtud')?.invalid && formulaire.get('nbEtud')?.touched">
+        <small class="text-danger">Le nombre d'étudiants est requis.</small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="formulaire.invalid">Ajouter le cours</button>
+  </form>
+
+  <div *ngIf="successMessage">
+    <p>{{ successMessage }}</p>
+  </div><hr>
+
+  <!-- Formulaire pour supprimer un cours par ID -->
+  <form (ngSubmit)="deleteCourse()" [formGroup]="deleteForm">
+    <label for="courseId">Sélectionner le cours à supprimer :</label>
+    <select id="courseId" formControlName="courseId" required>
+      <option value="">Sélectionner un cours</option>
+      <option *ngFor="let course of coursesData" [value]="course.id">{{ course.id }} - {{ course.title }}</option>
+    </select>
+    <button type="submit">Supprimer le cours</button>
+  </form>
+
 </section>
+
