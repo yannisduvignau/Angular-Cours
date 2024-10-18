@@ -1,82 +1,118 @@
 <section>
+  <!-- <button (click)="triggerSuccess('coucou')" class="btn btn-success">Afficher Succès</button>
+  <button (click)="triggerError('coucou nop')" class="btn btn-danger">Afficher Erreur</button> -->
   <!-- Interpolation : transferer des données -->
-  <p>Interpolation : {{getText()}}</p><hr>
+  <!-- <p>Interpolation : {{getText()}}</p><hr> -->
 
   <!-- Property Binding : mettre des valeurs à des propriétés -->
-  <p>Property binding <input type="text" [value]="author"></p><hr>
+  <!-- <p>Property binding <input type="text" [value]="author"></p><hr> -->
 
   <!-- Event binding : appeler une méthode sur un événement -->
-  <p>Event binding <input type="text" (click)="updateText()"></p><hr>
+  <!-- <p>Event binding <input type="text" (click)="updateText()"></p><hr> -->
 
   <!-- Two way binding : données en fontion d'un événement -->
-  <p>Two way binding <input type="text" [(ngModel)]="twBinding"></p>
-  <p>Vous avez entré : {{ twBinding }}</p><hr>
+  <!-- <p>Two way binding <input type="text" [(ngModel)]="twBinding"></p>
+  <p>Vous avez entré : {{ twBinding }}</p><hr> -->
 
   <!-- ngFor : itérer sur la liste des cours (Données en dur) -->
-  <div class="course-title">{{title}}</div>
+  <!-- <h3 class="course-title">{{title}} en dur</h3>
   <ul>
     <ng-container *ngFor="let course of courses">
       <li>{{ course.title }} - {{ course.description }} - {{ course.nbEtud }}</li>
     </ng-container>
-  </ul><hr>
+  </ul><hr> -->
+
+  <div style="display:flex;flex-direction:row;justify-content:space-evenly">
+    <!-- Formulaire d'ajout d'un cours -->
+    <div>
+      <h3 class="course-title">Ajout d'un cours</h3>
+      <form [formGroup]="formulaire" (ngSubmit)="addNewCourse()">
+        <div>
+          <label for="title">Titre :</label>
+          <input id="title" formControlName="title" placeholder="Titre du cours" />
+          <div *ngIf="formulaire.get('title')?.invalid && formulaire.get('title')?.touched">
+            <small class="text-danger">Le titre est requis.</small>
+          </div>
+        </div>
+        <div>
+          <label for="description">Description :</label>
+          <input id="description" formControlName="description" placeholder="Description du cours" />
+          <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched">
+            <small class="text-danger">La description est requise.</small>
+          </div>
+        </div>
+        <div>
+          <label for="nbEtud">Nombre d'étudiants :</label>
+          <input id="nbEtud" formControlName="nbEtud" type="number" placeholder="Nombre d'étudiants" />
+          <div *ngIf="formulaire.get('nbEtud')?.invalid && formulaire.get('nbEtud')?.touched">
+            <small class="text-danger">Le nombre d'étudiants est requis.</small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="formulaire.invalid">Ajouter le cours</button>
+      </form>
+    </div>
+
+    <!-- Formulaire pour supprimer un cours par ID -->
+    <div>
+      <h3 class="course-title">Supprimer un cours</h3>
+      <form (ngSubmit)="deleteCourse()" [formGroup]="deleteForm">
+        <div>
+          <label for="courseId">Sélectionner le cours à supprimer :</label>
+        </div>
+        <div>
+          <select id="courseId" formControlName="courseId" required>
+            <option value="">Sélectionner un cours</option>
+            <option *ngFor="let course of coursesData" [value]="course.id">{{ course.id }} - {{ course.title }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Supprimer le cours</button>
+      </form>
+    </div>
+  </div><hr>
 
   <!-- ngFor : itérer sur la liste des cours (Données en db) -->
-  <div class="course-title">{{title}}</div>
-  <ul>
-    <ng-container *ngFor="let courseData of coursesData">
-      <li>{{ courseData.title }} - {{ courseData.description }} - {{ courseData.nbEtud }}</li>
+  <h3 class="course-title">{{title}} en db</h3>
+  <!-- Pagination Controls -->
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+        <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
+      </li>
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <ul class="list-group mb-3">
+    <ng-container *ngFor="let courseData of coursesData | paginate: { itemsPerPage: 10, currentPage: currentPage }; let i = index">
+      <li class="list-group-item">
+        <strong>{{ courseData.title }}</strong> - {{ courseData.description }} - {{ courseData.nbEtud }}
+        <a class="btn btn-secondary float-right" [routerLink]="['/course', courseData.id]">Voir le détail</a>
+      </li>
     </ng-container>
-  </ul><hr>
+  </ul>
 
-  <!-- ngFor : itérer sur la liste des cours (Données en db) -->
-  <div class="course-title">{{title}}</div>
+
+  <hr>
+
+  <!-- Récupérer le cours passé en parametre -->
+  <!-- <div class="course-title">{{title}}</div>
   <div *ngIf="theCourse !== undefined">
     <li>{{ theCourse.title }} - {{ theCourse.description }} - {{ theCourse.nbEtud }}</li>
   </div>
   <div *ngIf="theCourse === undefined">
       <p>Le Cours {{idCourse}} n'existe pas</p>
   </div>
-  <hr>
-
-  <!-- Formulaire d'ajout d'un cours -->
-  <form [formGroup]="formulaire" (ngSubmit)="addNewCourse()">
-    <div>
-      <label for="title">Titre :</label>
-      <input id="title" formControlName="title" placeholder="Titre du cours" />
-      <div *ngIf="formulaire.get('title')?.invalid && formulaire.get('title')?.touched">
-        <small class="text-danger">Le titre est requis.</small>
-      </div>
-    </div>
-    <div>
-      <label for="description">Description :</label>
-      <input id="description" formControlName="description" placeholder="Description du cours" />
-      <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched">
-        <small class="text-danger">La description est requise.</small>
-      </div>
-    </div>
-    <div>
-      <label for="nbEtud">Nombre d'étudiants :</label>
-      <input id="nbEtud" formControlName="nbEtud" type="number" placeholder="Nombre d'étudiants" />
-      <div *ngIf="formulaire.get('nbEtud')?.invalid && formulaire.get('nbEtud')?.touched">
-        <small class="text-danger">Le nombre d'étudiants est requis.</small>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="formulaire.invalid">Ajouter le cours</button>
-  </form>
-
-  <div *ngIf="successMessage">
-    <p>{{ successMessage }}</p>
-  </div><hr>
-
-  <!-- Formulaire pour supprimer un cours par ID -->
-  <form (ngSubmit)="deleteCourse()" [formGroup]="deleteForm">
-    <label for="courseId">Sélectionner le cours à supprimer :</label>
-    <select id="courseId" formControlName="courseId" required>
-      <option value="">Sélectionner un cours</option>
-      <option *ngFor="let course of coursesData" [value]="course.id">{{ course.id }} - {{ course.title }}</option>
-    </select>
-    <button type="submit">Supprimer le cours</button>
-  </form>
+  <hr> -->
 
 </section>
 

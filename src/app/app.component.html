@@ -1,3 +1,26 @@
+
 <app-navbar></app-navbar>
-<app-courses></app-courses>
+<div aria-live="polite" aria-atomic="true">
+  <ngb-toast
+    *ngIf="showToast"
+    [header]="toastHeader"
+
+    (hidden)="onToastHidden()"
+  >
+      {{ toastMessage }}
+      <div class="progress" *ngIf="showProgressBar">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [style.width]="progress + '%'"
+          [class.bg-success]="toastHeader === 'Succès'"
+          [class.bg-danger]="toastHeader === 'Erreur'"
+          aria-valuenow="progress"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+  </ngb-toast>
+</div>
 <router-outlet></router-outlet>
+<!-- <app-footer></app-footer> -->

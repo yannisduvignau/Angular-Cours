@@ -1,0 +1,14 @@
+<section>
+  <div class="course-title">
+    <a routerLink="/courses" routerLinkActive="active" class="btn btn-secondary">Retour vers les cours</a>
+  </div>
+
+  <hr>
+
+  <div *ngIf="theCourse !== undefined">
+    <li>{{ theCourse.title }} - {{ theCourse.description }} - {{ theCourse.nbEtud }}</li>
+  </div>
+  <div *ngIf="theCourse === undefined">
+      <p>Le Cours {{idCourse}} n'existe pas</p>
+  </div>
+</section>

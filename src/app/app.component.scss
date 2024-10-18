@@ -1,0 +1,16 @@
+.progress {
+  height: 5px; /* Ajustez la hauteur selon vos besoins */
+}
+
+.progress-bar {
+  transition: width 0.1s; /* Animation pour rendre la barre fluide */
+}
+
+ngb-toast {
+  position: fixed;
+  right: 2%;
+  top: 10%;
+  z-index: 1050;
+}
+
+

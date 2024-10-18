@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../Model/course';
+import { Course } from '../../Model/course';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, switchMap } from 'rxjs';
 
@@ -35,7 +35,7 @@ export class CourseServiceService {
   }
 
   getCourseDataById(id: number): Observable<Course> {
-    return this.http.get<Course>(this.apiUrl + '?id=' + id);
+    return this.http.get<Course>(this.apiUrl +'?id='+ id);
   }
 
   addCourse(newCourse:Course):Observable<Course>{

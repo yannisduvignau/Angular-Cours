@@ -2,28 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Course } from '../Model/course';
 import { NgFor, NgIf } from '@angular/common';
-import { CourseServiceService } from '../services/course-service.service';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CourseServiceService } from '../services/course/course-service.service';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
+import { NotificationService } from '../services/notification/notification.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, ReactiveFormsModule],
+  imports: [FormsModule, NgFor, NgIf, ReactiveFormsModule,RouterLink,RouterLinkActive,NgxPaginationModule],
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss'] // Correction ici (styleUrls)
 })
 export class CoursesComponent implements OnInit {
 
+  /*----------------------------
+          CONSTRUCTEUR
+  ----------------------------*/
+
   constructor(
     private courseService: CourseServiceService,
     private route: ActivatedRoute,
-    private fb: FormBuilder // Utilisation de FormBuilder pour créer le FormGroup
+    private fb: FormBuilder,
+    private notificationService: NotificationService
   ) { }
 
-  texte: string = "composant courses";
-  author: string = "Auteur";
-  twBinding!: string;
+  /*----------------------------
+            VARIABLES
+  ----------------------------*/
+  // texte: string = "composant courses";
+  // author: string = "Auteur";
+  // twBinding!: string;
 
   title!: string;
   courses!: Course[];
@@ -33,23 +42,47 @@ export class CoursesComponent implements OnInit {
   theCourse!: Course | undefined;
 
   formulaire!: FormGroup;
-  successMessage: string = '';
 
   deleteForm!: FormGroup;
-  errorMessage: string = '';
+
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalPages = 1;
+
+
+  /*----------------------------
+            FONCTIONS
+  ----------------------------*/
+
+  /**
+   * Get the texte attribute
+   *
+   * @return string
+   */
+  // getText():string{
+  //   return this.texte;
+  // }
+
+
+
+  /**
+   * Change the texte attribute
+   *
+   * @return void
+   */
+  // updateText():void{
+  //   this.texte= "nouveau-titre"
+  // }
 
 
 
   /**
    *
    *
-   *
-   *
-   *
-   *
+   * @return void
    */
-  getText(){
-    return this.texte;
+  triggerSuccess(message:string) {
+    this.notificationService.showSuccess(message);
   }
 
 
@@ -57,13 +90,10 @@ export class CoursesComponent implements OnInit {
   /**
    *
    *
-   *
-   *
-   *
-   *
+   * @return void
    */
-  updateText(){
-    this.texte= "nouveau-titre"
+  triggerError(message:string) {
+    this.notificationService.showError(message);
   }
 
 
@@ -80,9 +110,12 @@ export class CoursesComponent implements OnInit {
     this.courseService.getCoursesData().subscribe(
       (data: Course[]) => {
         this.coursesData = data;
+        this.totalPages = Math.ceil(this.coursesData.length / this.itemsPerPage);
+        // this.triggerSuccess("Données récupérées avec succès !");
       },
       (error) => {
         console.error('Erreur lors de la récupération des données', error);
+        // this.triggerError("Erreur lors de la récupération des données");
       }
     );
   }
@@ -111,7 +144,6 @@ export class CoursesComponent implements OnInit {
 
 
 
-
   /**
    *
    *
@@ -120,19 +152,10 @@ export class CoursesComponent implements OnInit {
    *
    *
    */
-  ngOnInit(): void {
-    this.title = "Liste de cours";
-    this.courses = this.courseService.getCourses();
-
-    this.loadCourses();
-
-    this.initializeForms();
-
+  getParams(): void {
     // Récupérer l'ID via un paramètre de requête
     this.route.queryParams.subscribe(params => {
       this.idCourse = params['id'];
-      console.log('ID récupéré :', this.idCourse);
-
       if (this.idCourse) {
         this.courseService.getCourseDataById(+this.idCourse).subscribe({
           next: (theCourse) => {
@@ -150,8 +173,9 @@ export class CoursesComponent implements OnInit {
         });
       }
     });
-
   }
+
+
 
 
   /**
@@ -175,20 +199,24 @@ export class CoursesComponent implements OnInit {
         this.courseService.addCourse(newCourse).subscribe({
           next: (course) => {
             this.coursesData.push(course);
-            this.successMessage = "Cours ajouté avec succès !";
+            this.triggerSuccess("Cours ajouté avec succès !");
             this.loadCourses();
             this.formulaire.reset();
           },
           error: (err) => {
             console.log('Erreur lors de l\'ajout du cours :' + err);
-            alert("Le cours n'a pas pu être ajouté.");
+            //alert("Le cours n'a pas pu être ajouté.");
+            this.triggerError("Le cours n'a pas pu être ajouté.");
           }
         });
       });
     } else {
-      alert("Veuillez remplir tous les champs du formulaire.");
+      //alert("Veuillez remplir tous les champs du formulaire.");
+      this.triggerError("Veuillez remplir tous les champs du formulaire.");
     }
   }
+
+
 
 
   /**
@@ -199,7 +227,6 @@ export class CoursesComponent implements OnInit {
    *
    *
    */
-  // Fonction pour supprimer un cours
   deleteCourse(): void {
     const courseId = this.deleteForm.get('courseId')?.value;
 
@@ -209,10 +236,38 @@ export class CoursesComponent implements OnInit {
         next: () => {
           this.loadCourses();
           this.deleteForm.reset();
+        },
+        error: (err) => {
+          //console.log('Erreur lors de l\'ajout du cours :' + err);
+          //alert("Le cours n'a pas pu être ajouté.");
+          this.triggerError("Le cours n'a pas pu être supprimé.");
         }
       });
     } else {
-      this.errorMessage = 'Veuillez sélectionner un cours valide.';
+      this.triggerError('Veuillez sélectionner un cours valide.');
     }
+  }
+
+
+
+
+  /**
+   *
+   *
+   *
+   *
+   *
+   *
+   */
+  ngOnInit(): void {
+    this.title = "Liste de cours";
+    this.courses = this.courseService.getCourses();
+
+    this.loadCourses();
+
+    this.initializeForms();
+
+    this.getParams();
+
   }
 }
