@@ -5,98 +5,63 @@
       "title": "C1",
       "description": "Cours HTML/CSS",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 2,
       "title": "C2",
       "description": "Cours Docker",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 3,
       "title": "C3",
       "description": "Cours cybersécurité",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 4,
       "title": "C4",
       "description": "Cours FastApi",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 5,
       "title": "C5",
       "description": "Cours Laravel",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 6,
       "title": "C6",
       "description": "Cours Angular",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 7,
       "title": "C7",
       "description": "Cours JS/TS",
       "nbEtud": 10,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 8,
       "title": "C8",
       "description": "Cours Java",
       "nbEtud": 0,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     },
     {
       "id": 9,
       "title": "C9",
       "description": "Cours Javascript",
       "nbEtud": 6,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
-    },
-    {
-      "id": 10,
-      "title": "a",
-      "description": "a",
-      "nbEtud": 0,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
-    },
-    {
-      "id": 11,
-      "title": "a",
-      "description": "a",
-      "nbEtud": 0,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
-    },
-    {
-      "id": 12,
-      "title": "a",
-      "description": "a",
-      "nbEtud": 0,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
-    },
-    {
-      "id": 13,
-      "title": "b",
-      "description": "b",
-      "nbEtud": 0,
-      "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
-    },
-    {
-      "id": 14,
-      "title": "a",
-      "description": "a",
-      "nbEtud": 1,
-       "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
+      "descriptionLongue": "Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     }
   ],
   "Category": [
@@ -104,19 +69,19 @@
       "id": 1,
       "title": "Front-end",
       "description": "Description pour la front-end categorie",
-      "visibility" : "display"
+      "visibility": "display"
     },
     {
       "id": 2,
       "title": "Back-end",
       "description": "Description pour la back-end categorie",
-      "visibility" : "display"
+      "visibility": "display"
     },
     {
       "id": 3,
       "title": "DevOps",
       "description": "Description pour la devOps categorie",
-      "visibility" : "display"
+      "visibility": "display"
     }
   ]
 }

@@ -58,4 +58,30 @@ export class NavbarComponent {
       }
     )
   };
+
+
+
+  /**
+   *
+   *
+   *
+   */
+  onSearch(event: Event) {
+    event.preventDefault(); // Empêche le rechargement de la page lors de la soumission
+
+    // Récupère la saisie utilisateur depuis l'input
+    const inputElement = (event.target as HTMLElement).querySelector('input');
+    const searchTerm = inputElement?.value;
+
+    if (searchTerm) {
+      // Force TypeScript à accepter window.find()
+      const found = (window as any).find(searchTerm);
+
+      if (!found) {
+        console.log('Texte non trouvé sur la page.');
+        alert(`Le texte "${searchTerm}" n'a pas été trouvé sur la page.`);
+      }
+    }
+  }
+
 }

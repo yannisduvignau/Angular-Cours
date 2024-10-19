@@ -15,3 +15,20 @@ nav{
       }
   }
 }
+
+.custom-btn {
+  background-color: white;
+  border: 1px solid #ced4da; /* Bordure légère */
+  transition: background-color 0.3s ease; /* Animation de la transition */
+
+  /* Changement de l'arrière-plan au survol */
+  &:hover {
+    background-color: #f0f0f0; /* Gris clair */
+  }
+
+  /* Facultatif: pour modifier la couleur de l'icône lors du survol */
+  &:hover i {
+    color: #6c757d; /* Gris foncé pour l'icône */
+  }
+}
+

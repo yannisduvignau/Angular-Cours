@@ -24,7 +24,7 @@
     <div><strong>{{ Course.title }}</strong> - {{ Course.description }} - {{ Course.nbEtud }}</div>
     <div style="display:flex;align-items:center;column-gap:50px">
       <div><input [name]="Course.title" [(ngModel)]="Course.nbEtud" (change)="updateNbEtude()"> étudiants</div>
-      <a class="btn btn-secondary float-right" [routerLink]="['/course', Course.id]">Voir le détail</a>
+      <a class="btn btn-secondary float-right" [routerLink]="['/admin/course', Course.id]">Voir le détail</a>
     </div>
   </li>
 </div>

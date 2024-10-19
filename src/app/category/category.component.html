@@ -1,1 +1,27 @@
-<p>category works!</p>
+<div *ngIf="Category == undefined">
+  <section>
+    <div class="category-title">
+      <a routerLink="/admin/categories" routerLinkActive="active" class="btn btn-secondary">Retour vers les cours</a>
+    </div>
+
+    <hr>
+
+    <div *ngIf="theCategory !== undefined">
+      <li>{{ theCategory.title }} - {{ theCategory.description }}</li>
+    </div>
+
+    <div>{{ theCategory?.visibility }}</div>
+
+    <div *ngIf="theCategory === undefined">
+        <p>Le Cours {{idCategory}} n'existe pas</p>
+    </div>
+  </section>
+</div>
+
+
+<div *ngIf="Category !== undefined">
+  <li class="list-group-item" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding-right:80px;padding-left:80px">
+    <div><strong>{{ Category.title }}</strong> - {{ Category.description }}</div>
+      <a class="btn btn-secondary float-right" [routerLink]="['/admin/category', Category.id]">Voir le détail</a>
+  </li>
+</div>

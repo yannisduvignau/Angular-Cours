@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="">ANGULAR BACHELOR</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,15 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
+        <form class="d-flex" role="search" (submit)="onSearch($event)">
+          <div class="input-group">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" required>
+            <button class="btn custom-btn" type="submit">
+              <i class="bi bi-search"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+              </i> <!-- Icône de loupe -->
+            </button>
+          </div>
+        </form>
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Se connecter</a>
         </li>

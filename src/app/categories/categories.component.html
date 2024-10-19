@@ -1,1 +1,98 @@
-<p>categories works!</p>
+<section>
+  <div style="display:flex;flex-direction:row;justify-content:space-evenly">
+    <!-- Formulaire d'ajout d'une categorie -->
+    <div class="container mt-5">
+      <h3 class="category-title mb-4">Ajout d'une categorie</h3>
+
+      <form [formGroup]="formulaire" (ngSubmit)="addNewCategory()" class="needs-validation" novalidate>
+        <!-- Titre d'une categorie -->
+        <div class="form-group mb-3">
+          <label for="title" class="form-label">Titre :</label>
+          <input id="title" class="form-control" formControlName="title" placeholder="Titre d'une categorie" [class.is-invalid]="formulaire.get('title')?.invalid && formulaire.get('title')?.touched"/>
+          <div *ngIf="formulaire.get('title')?.invalid && formulaire.get('title')?.touched" class="invalid-feedback">
+            Le titre est requis.
+          </div>
+        </div>
+
+        <!-- Description d'une categorie -->
+        <div class="form-group mb-3">
+          <label for="description" class="form-label">Description :</label>
+          <input id="description" class="form-control" formControlName="description" placeholder="Description d'une categorie" [class.is-invalid]="formulaire.get('description')?.invalid && formulaire.get('description')?.touched"/>
+          <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched" class="invalid-feedback">
+            La description est requise.
+          </div>
+        </div>
+
+
+        <!-- Visibilité d'une categorie -->
+        <div class="form-group mb-3">
+          <label for="visibility" class="form-label">Visibilité</label>
+          <select id="visibility" class="form-select" formControlName="visibility" required>
+            <option value="" disabled selected>Choisissez une visibilité</option>
+            <option *ngFor="let visibility of categoryVisibilityEnum | keyvalue" [value]="visibility.value">
+              {{ visibility.value.charAt(0).toUpperCase() + visibility.value.slice(1) }} <!-- Capitalise le premier caractère -->
+            </option>
+          </select>
+          <div *ngIf="formulaire.get('description')?.invalid && formulaire.get('description')?.touched" class="text-danger">
+            La visibilité est requise.
+          </div>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="btn btn-primary" [disabled]="formulaire.invalid">Ajouter la categorie</button>
+      </form>
+    </div>
+
+
+    <!-- Formulaire pour supprimer une categorie par ID -->
+    <div class="container mt-5">
+      <h3 class="category-title mb-4">Supprimer une categorie</h3>
+
+      <form (ngSubmit)="deleteCategory()" [formGroup]="deleteForm" class="needs-validation" novalidate>
+        <!-- Sélectionner une categorie -->
+        <div class="form-group mb-3">
+          <label for="categoryId" class="form-label">Sélectionner la categorie à supprimer :</label>
+          <select id="categoryId" class="form-select" formControlName="categoryId" required [class.is-invalid]="deleteForm.get('categoryId')?.invalid && deleteForm.get('categoryId')?.touched">
+            <option value="">Sélectionner une categorie</option>
+            <option *ngFor="let category of categoriesData" [value]="category.id">{{ category.id }} - {{ category.title }}</option>
+          </select>
+          <div *ngIf="deleteForm.get('categoryId')?.invalid && deleteForm.get('categoryId')?.touched" class="invalid-feedback">
+            Veuillez sélectionner une categorie.
+          </div>
+        </div>
+
+        <!-- Bouton de suppression -->
+        <button type="submit" class="btn btn-danger" [disabled]="deleteForm.invalid">Supprimer la categorie</button>
+      </form>
+    </div>
+  </div><hr>
+
+  <!-- ngFor : itérer sur la liste des categorie (Données en db) -->
+  <h3 class="category-title">{{title}} en db</h3>
+  <!-- Pagination Controls -->
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+        <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
+      </li>
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <ul class="list-group mb-3">
+    <ng-container *ngFor="let categoryData of categoriesData | paginate: { itemsPerPage: 10, currentPage: currentPage }; let i = index">
+      <app-category [Category]="categoryData"></app-category>
+    </ng-container>
+  </ul>
+</section>
+
