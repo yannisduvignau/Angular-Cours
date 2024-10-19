@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
-import { Course } from '../Model/course';
+import { Course } from '../model/course';
 import { CourseServiceService } from '../services/course/course-service.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { NotificationService } from '../services/notification/notification.service';
@@ -72,8 +72,6 @@ export class CourseComponent {
 
     this.idCourse = this.route.snapshot.params["id"];
     if (this.idCourse !== undefined) {
-      console.log(this.idCourse)
-      console.log(typeof(this.idCourse))
       this.courseService.getCourseDataById(this.idCourse).subscribe({
         next: (theCourse) => {
           if (Array.isArray(theCourse) && theCourse.length > 0) {
@@ -85,7 +83,6 @@ export class CourseComponent {
             this.triggerError(`Le cours ${this.idCourse} n'existe pas !`);
           }
 
-          console.log('Cours récupéré :', this.theCourse);
         },
         error: (err) => {
           console.error('Erreur lors de la récupération du cours:', err);

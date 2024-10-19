@@ -7,6 +7,4 @@ export class Course{
     public descriptionLongue:string
   ){}
 
-
-
 }

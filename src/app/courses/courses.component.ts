@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Course } from '../Model/course';
+import { Course } from '../model/course';
 import { NgFor, NgIf } from '@angular/common';
 import { CourseServiceService } from '../services/course/course-service.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';

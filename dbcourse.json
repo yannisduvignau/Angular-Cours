@@ -98,5 +98,25 @@
       "nbEtud": 1,
        "descriptionLongue":"Aliqua consequat occaecat do amet dolor minim eu. Irure voluptate ut voluptate ipsum quis aliquip anim ea sunt cillum veniam. Dolore velit est eiusmod aute in eu et."
     }
+  ],
+  "Category": [
+    {
+      "id": 1,
+      "title": "Front-end",
+      "description": "Description pour la front-end categorie",
+      "visibility" : "display"
+    },
+    {
+      "id": 2,
+      "title": "Back-end",
+      "description": "Description pour la back-end categorie",
+      "visibility" : "display"
+    },
+    {
+      "id": 3,
+      "title": "DevOps",
+      "description": "Description pour la devOps categorie",
+      "visibility" : "display"
+    }
   ]
 }
